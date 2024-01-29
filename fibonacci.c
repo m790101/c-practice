@@ -1,43 +1,34 @@
 #include <stdio.h>
-
-
-// int fibonacci(int n);
-int fibonacci2(int n);
+int getFibonacci(int n);
 
 int main(){
-    int num;
-    printf("pick a number:");
-    scanf("%d", &num);
-    printf("your number is %d\n", num);
-    printf("the fibonacci number is %d\n", fibonacci2(num));
-    return 0;
+
+    int n;
+    printf("enter a number:");
+    scanf("%d", &n);
+   int result = getFibonacci(n);
+    printf("result is %d\n", result);
 }
 
 
-// int fibonacci(int n){
-//     if (n == 0){
-//         return 0;
-//     }
-//     if (n == 1){
-//         return 1;
-//     }
-//     int fib[100];
 
-//     return fibonacci(n-1) + fibonacci(n-2);
-// }
+int getFibonacci(int n){
+    //fibonacci(3) = fibonacci(2) + fibonacci(1)
 
-int fibonacci2(int n){
-    int fib[n+1];
-    fib[0] = 0;
-    fib[1] = 1;
-
-    if (n < 2){
-        return fib[n];
-    } else {
-        int i;
-        for(i=2; i<=n; i++){
-        fib[i] = fib[i-1] + fib[i-2];
+    //setting a array with size n + 1 for storing results
+    int fibonacci[n+1];
+    // when n = 0 or 1, the result is 0 or 1
+    fibonacci[0] = 0;
+    fibonacci[1] = 1;
+    //for loop from i = 2 to n
+    int i;
+    // if n=4 first time i = 2 fibonacci[2] = fibonacci[1] + fibonacci[0] = 1
+    // n =3 i = 3 fibonacci[3] = fibonacci[2] + fibonacci[1] = 2
+    // n=4 fibonacci[4] = fibonacci[3] + fibonacci[2] = 3
+    for(i = 2; i <= n ; i++){
+        fibonacci[i] = fibonacci[i-1] + fibonacci[i-2];
     }
-    }
-    return fib[n];
+
+    return fibonacci[n];
+    
 }
