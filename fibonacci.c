@@ -15,8 +15,8 @@ int main(){
 int getFibonacci(int n){
     //fibonacci(3) = fibonacci(2) + fibonacci(1)
 
-    //setting a array with size n for storing results
-    int fibonacci[n];
+    //setting a array with size n + 1 for storing results
+    int fibonacci[n+1];
     // when n = 0 or 1, the result is 0 or 1
     fibonacci[0] = 0;
     fibonacci[1] = 1;
