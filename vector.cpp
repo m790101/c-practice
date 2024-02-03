@@ -10,8 +10,8 @@ int main()
 {
     // vector<int> foo = {1,3};
     vector<string> foo = {"0", "yo"};
-    // foo.push_back("Hello");
-    // foo.push_back("World");
+    foo.push_back("Hello");
+    foo.push_back("World");
 
     string bar = "1231231";
 
@@ -19,7 +19,7 @@ int main()
     printVector(foo);
     foo.pop_back();
     printVector(foo);
-    foo.insert(foo.begin(), bar);
+    foo.insert(foo.begin()+3, bar);
     printVector(foo);
     return 0;
 }
