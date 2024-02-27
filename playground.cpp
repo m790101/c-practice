@@ -4,21 +4,62 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <cstdlib>
+#include <random>
+#include <string>
+class Archer
+{
+protected:
+    int maxHealth;
+    int range;
+    int damage;
+    std::string name = "archer";
+    // int attackSpeed;
+public:
+    Archer(int maxHealth, int range, int damage)
+    {
+        this->maxHealth = maxHealth;
+        this->range = range;
+        this->damage = damage;
+    }
 
+    void getDetails()
+    {
+        std::cout << "maxHealth: " << maxHealth << std::endl;
+        std::cout << "range: " << range << std::endl;
+        std::cout << "damage: " << damage << std::endl;
+    }
+
+    void attack()
+    {
+
+        std::random_device rd;  // a seed source for the random number engine
+        std::mt19937 gen(rd()); // mersenne_twister_engine seeded with rd()
+        std::uniform_int_distribution<> distrib(0, damage);
+      
+        std::cout << name <<" Attacking" << std::endl;
+        int factor = distrib(gen);
+        std::cout << "enemy got " << damage - factor << " damage" << std::endl;
+    }
+};
+
+
+class ChineseArcher : public Archer{
+    public:
+
+    // ChineseArcher():
+    ChineseArcher(int maxHealth, int range, int damage):Archer(maxHealth, range, damage){
+        name = "ChineseArcher"; // Setting name in the derived class
+    }
+};
 
 int main()
 {
     std::vector<int> foo = {1, 3};
-    // std::vector<int>::iterator it;
-    for(auto it=foo.begin(); it != foo.end(); it++){
+    Archer archer1 = Archer(100, 10, 20);
+    archer1.attack();
 
-        // std::cout << *it << std::endl;
-        *it = *it + 1;
-         std::cout << *it << std::endl;
-    }
-    // for(auto &i : foo){
-    //     std::cout << i << "\n";
-    // }
-    // std::cout << *foo.end()<<std::endl;
+    ChineseArcher archer2 = ChineseArcher(50, 8, 7);
+    archer2.attack();
     return 0;
 }
