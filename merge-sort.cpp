@@ -9,25 +9,14 @@
 
 std::vector<int> compare(std::vector<int> vectorR, std::vector<int> vectorL, int i, int j, std::vector<int> vSort);
 
+std::vector<int> mergeSort(std::vector<int> v);
+
 int main()
 {
     std::vector<int> foo = {1, 5, 3, 7, 9};
+    std::vector<int> result = mergeSort(foo);
 
-    int mid = foo.size() / 2;
-    std::vector<int> vectorR(foo.begin() + mid, foo.end());
-    std::vector<int> vectorL(foo.begin(), foo.begin() + mid);
-
-    std::cout << "vectorL" << std::endl;
-    for (int i = 0; i < vectorL.size(); i++)
-    {
-        std::cout << vectorL[i] << std::endl;
-    }
-    std::cout << "vectorR" << std::endl;
-    for (int i = 0; i < vectorR.size(); i++)
-    {
-        std::cout << vectorR[i] << std::endl;
-    }
-
+    std::cout << "vector" << std::endl;
     for (int i = 0; i < result.size(); i++)
     {
         std::cout << result[i] << std::endl;
@@ -36,25 +25,26 @@ int main()
     return 0;
 }
 
-void mergeSort(std::vector<int> v)
+std::vector<int> mergeSort(std::vector<int> v)
 {
-    // divide in half if there are more than 1 element
-    if (v.size > 1)
+    if (v.size() < 2)
     {
-        int mid = foo.size() / 2;
-        std::vector<int> vectorR(v.begin() + mid, v.end());
-        return mergeSort(vectorR);
-        std::vector<int> vectorL(v.begin(), v.begin() + mid);
-        return mergeSort(vectorL);
+        return v;
     }
+    // divide in half if there are more than 1 element
+    int mid = v.size() / 2;
+    std::vector<int> vectorR(v.begin() + mid, v.end());
+    std::vector<int> vectorL(v.begin(), v.begin() + mid);
+    std::vector<int> vSort = {};
+
+    int i = 0;
+    int j = 0;
+    return compare(mergeSort(vectorR), mergeSort(vectorL), i, j, vSort);
+
 
     // when it goes to the base case, compare left and right and merge them
 
     // compare left and right
-    int i = 0;
-    int j = 0;
-    std::vector<int> vSort = {};
-    compare(vectorR, vectorL, i, j);
 
     // merge: walk from both side index = 0, compare them
     // if one side is bigger , put the smaller side to the sorted vector and compare next one from smaller side with the bigger side
