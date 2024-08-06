@@ -69,3 +69,86 @@ void printTree(TreeNode *node)
         printTree(node->right);
     }
 }
+
+
+
+
+
+
+
+
+
+
+/*
+Given an integer n, 
+return all the structurally unique BST's (binary search trees), 
+which has exactly n nodes of unique values from 1 to n. Return the answer in any order.
+
+Example 1:
+
+
+Input: n = 3
+Output: [[1,null,2,null,3],[1,null,3,2],[2,1,3],[3,1,null,null,2],[3,2,null,1]]
+Example 2:
+
+Input: n = 1
+Output: [[1]]
+*/
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    vector<TreeNode*> generateTrees(int n) {
+                unordered_map<int,vector<TreeNode*>> map;
+        vector<TreeNode*> res;
+        map[1] = {new TreeNode(1)};
+        map[0] = {nullptr};
+        for(int i = 1; i <= n; ++i)
+        {
+            vector<TreeNode*> nodeVec;
+            for(int j  = 1; j < i; j++)
+            {
+                
+                vector<TreeNode*> left = map[j];
+                vector<TreeNode*> right = map[i-j-1];
+                int leftIndex = 0;
+                int rightIndex = 0;
+                queue<TreeNode*> q;
+                for(auto& node:left)
+                {
+                    TreeNode* root = new TreeNode(i);
+                    root->left = node;
+                    q.push(root);
+                }
+                while(!q.empty())
+                {
+                    TreeNode* leftSide = q.front();
+                    for(auto& node:right)
+                    {
+                        TreeNode* ptr = leftSide;
+                        ptr -> right = node;
+                        res.push_back(ptr);
+                        nodeVec.push_back(ptr);
+                    }
+                    q.pop();
+                }
+ 
+            }
+                if(i > 1)
+                {
+                    map[i] = nodeVec;
+                }
+        }
+        return res;
+    }
+};
